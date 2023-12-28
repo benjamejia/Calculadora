@@ -1,12 +1,11 @@
-.BotonClear{
+.BotonClear {
     color: aliceblue;
     font-size: 1.3cm;
     background-color: rgb(155, 133, 102);
     border-radius: 15px;
     margin: 3px;
-    border: 6px black;
+    border: 2px solid rgb(0, 0, 0);
     cursor: pointer;
     flex: 1 1;
-    padding-left: 15px;
     user-select: none;
 }

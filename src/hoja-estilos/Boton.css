@@ -1,4 +1,4 @@
-.boton-contenedor{
+.boton-contenedor {
     color: aliceblue;
     font-size: 1.3cm;
     background-color: rgb(155, 133, 102);
@@ -8,6 +8,4 @@
     cursor: pointer;
     flex: 1 1;
     user-select: none;
-    padding-left: 15px
-   
 }

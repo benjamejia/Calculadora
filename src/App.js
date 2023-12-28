@@ -1,72 +1,84 @@
+import { evaluate } from 'mathjs';
+import { useState } from 'react';
+
 import './App.css';
 import Pantalla from './componentes/Pantalla';
 import './hoja-estilos/Boton.css';
-import {useState} from 'react';
 import BotonClear from './componentes/BotonClear';
-import { evaluate } from 'mathjs';  
+import Boton from './componentes/Boton';
 
-
-function App(){
-
+function App() {
   const [input, setInput] = useState('');
-  
-  const agregarInput = val => {
+
+  const setScreenValue = val => {
     setInput(input + val);
   }
 
-  function Boton(props){
-  const es0poreador = valor => {
+  const getResult = () => {
+    setInput(evaluate(input))
+  }
+
+  const esOperador = valor => {
     return isNaN(valor) && (valor !== '.') && (valor !== '=');
   };
 
-    return(
-    <div
-     className={`boton-contenedor ${es0poreador(props.children) ? 'operador' : ''}`.trimEnd()}
-     onClick={() => props.manejarClic(props.children)}>
-      {props.children}
+  return (
+    <div className='App'>
+      <div className='contenedor-calculadora'>
+        <Pantalla input={input} />
+        <div className='fila'>
+          {
+            [9, 8, 7, '/'].map(
+              (numero) => (
+                <button
+                  key={numero}
+                  className={esOperador(numero) ? 'boton-contenedor operador' : 'boton-contenedor'}
+                  onClick={() => setScreenValue(numero)}
+                >
+                  {numero}
+                </button>
+              )
+            )
+          }
+        </div>
+        <div className='fila'>
+          {
+            [6, 5, 4, '*'].map(
+              (numero) => (
+                <button
+                  key={numero}
+                  className={esOperador(numero) ? 'boton-contenedor operador' : 'boton-contenedor'}
+                  onClick={() => setScreenValue(numero)}
+                >
+                  {numero}
+                </button>
+              )
+            )
+          }
+        </div>
+        <div className='fila'>
+          {
+            [3, 2, 1, '+'].map(
+              (numero) => (
+                <button
+                  key={numero}
+                  className={esOperador(numero) ? 'boton-contenedor operador' : 'boton-contenedor'}
+                  onClick={() => setScreenValue(numero)}
+                >
+                  {numero}
+                </button>
+              )
+            )
+          }
+        </div>
+        <div className='fila'>
+          <Boton manejarClic={setScreenValue}>.</Boton>
+          <Boton manejarClic={setScreenValue}>0</Boton>
+          <Boton manejarClic={() => setInput('')}>c</Boton>
+          <Boton manejarClic={getResult}>=</Boton>
+        </div>
+      </div>
     </div>
-    );
-  }
-  
-  const calcularResultado = () => {
-  setInput(evaluate(input))
-  }
-
-  
-  return(
-<div className='App'>   
-  <div className='contenedor-calculadora'>
-  <Pantalla input={ input }/>  
-    <div className='fila'>
-    <Boton manejarClic={agregarInput}>9</Boton>
-    <Boton manejarClic={agregarInput}>8</Boton>
-    <Boton manejarClic={agregarInput}>7</Boton>
-    <Boton manejarClic={agregarInput}>/</Boton>
-    </div>
-    <div className='fila'>
-    <Boton manejarClic={agregarInput}>6</Boton>
-    <Boton manejarClic={agregarInput}>5</Boton>
-    <Boton manejarClic={agregarInput}>4</Boton>
-    <Boton manejarClic={agregarInput}>*</Boton>
-    </div>
-    <div className='fila'>
-    <Boton manejarClic={agregarInput}>3</Boton>
-    <Boton manejarClic={agregarInput}>2</Boton>
-    <Boton manejarClic={agregarInput}>1</Boton>
-    <Boton manejarClic={agregarInput}>+</Boton>
-    </div>
-    <div className='fila'>
-    <Boton manejarClic={agregarInput}>.</Boton>
-    <Boton manejarClic={agregarInput}>0</Boton>
-    <div className='BotonClear'>
-    <BotonClear  manejarClear={() => setInput('')}>c</BotonClear>
-    </div>
-    <Boton manejarClic={calcularResultado}>=</Boton>
-    </div>
-    
-
-  </div>
-</div>   
   );
 }
 

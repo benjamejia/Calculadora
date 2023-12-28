@@ -1,0 +1,13 @@
+.boton-contenedor{
+    color: aliceblue;
+    font-size: 1.3cm;
+    background-color: rgb(155, 133, 102);
+    border-radius: 15px;
+    margin: 3px;
+    border: 2px solid rgb(0, 0, 0);
+    cursor: pointer;
+    flex: 1 1;
+    user-select: none;
+    padding-left: 15px
+   
+}
